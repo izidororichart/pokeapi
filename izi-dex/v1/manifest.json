@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "dataVersion": "6a2723cdc6fffcc417a1b20a",
+  "dataVersion": "69544bbefc1c4bdb6f9f00b3",
   "source": {
     "repository": "izidororichart/pokeapi",
     "branch": "master",
-    "commit": "a483e4fe6e5c5a37ebdccb080898f7f712dbe955"
+    "commit": "7d02b81551a66d42651ddd23aee5a2e8f41979ba"
   },
   "scope": {
     "maxSpecies": 809,
@@ -25,6 +25,6 @@
     "file": "encounters.json",
     "count": 1926,
     "gameCount": 28,
-    "sha256": "2d3f782f009c0cd5ff2793588a4292c7e642e6053f027044953046f436052b54"
+    "sha256": "70492f0cfad2cdecbe0d15a36a912d289a4c199ad59ab4e50688e0eac4b3969e"
   }
 }
