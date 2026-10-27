@@ -1,0 +1,60 @@
+name: Refresh IZI Dex data bundle
+
+on:
+  push:
+    branches: ["master"]
+    paths:
+      - "data/v2/csv/pokemon.csv"
+      - "data/v2/csv/pokemon_species.csv"
+      - "data/v2/csv/pokemon_species_names.csv"
+      - "data/v2/csv/pokemon_types.csv"
+      - "data/v2/csv/pokemon_stats.csv"
+      - "data/v2/csv/pokemon_forms.csv"
+      - "data/v2/csv/pokemon_form_names.csv"
+      - "data/v2/csv/types.csv"
+      - "data/v2/csv/stats.csv"
+      - "data/v2/csv/version_groups.csv"
+      - "scripts/export_izi_dex_data.py"
+      - ".github/workflows/izi-dex-data.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: izi-dex-data-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  export-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate IZI Dex bundle
+        run: |
+          python scripts/export_izi_dex_data.py \
+            --pokeapi-dir data/v2/csv \
+            --max-species 809 \
+            --max-generation 7 \
+            --output-dir izi-dex/v1 \
+            --source-commit "$GITHUB_SHA" \
+            --source-branch "$GITHUB_REF_NAME"
+
+      - name: Commit bundle when changed
+        run: |
+          git add izi-dex/v1/
+          if git diff --cached --quiet; then
+            echo "IZI Dex bundle is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: refresh IZI Dex data bundle"
+          git push
