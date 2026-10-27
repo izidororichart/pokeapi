@@ -14,7 +14,17 @@ on:
       - "data/v2/csv/types.csv"
       - "data/v2/csv/stats.csv"
       - "data/v2/csv/version_groups.csv"
+      - "data/v2/csv/encounters.csv"
+      - "data/v2/csv/encounter_slots.csv"
+      - "data/v2/csv/encounter_methods.csv"
+      - "data/v2/csv/encounter_method_prose.csv"
+      - "data/v2/csv/location_areas.csv"
+      - "data/v2/csv/location_area_encounter_rates.csv"
+      - "data/v2/csv/locations.csv"
+      - "data/v2/csv/location_names.csv"
+      - "data/v2/csv/versions.csv"
       - "scripts/export_izi_dex_data.py"
+      - "scripts/export_izi_dex_encounters.py"
       - ".github/workflows/izi-dex-data.yml"
   workflow_dispatch:
   schedule:
@@ -66,6 +76,11 @@ jobs:
             --source-commit "$POKEAPI_SOURCE_COMMIT" \
             --source-branch "$POKEAPI_SOURCE_BRANCH" \
             --source-repository "$POKEAPI_SOURCE_REPOSITORY"
+          python scripts/export_izi_dex_encounters.py \
+            --pokeapi-dir "$POKEAPI_SOURCE_DIR" \
+            --max-species 809 \
+            --max-generation 7 \
+            --output-dir izi-dex/v1
 
       - name: Commit bundle when changed
         run: |
