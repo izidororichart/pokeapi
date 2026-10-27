@@ -165,9 +165,10 @@ def build_encounter_catalog(csv_dir: Path, max_species: int, max_generation: int
         if game and location_id:
             locations_by_game[game].add(location_id)
 
-    # (game, location ID, method ID) -> set of compact entries. Merging location
-    # areas beneath a location keeps routes together while retaining method details.
-    encounters_by_key: dict[tuple[str, str, str], set[tuple[int, int | None, int | None, int | None]]] = defaultdict(set)
+    # (game, location ID, method ID) -> distinct species/level/slot records.
+    # Keeping the slot ID lets us merge repeated level ranges while counting each
+    # encounter slot's probability only once per species.
+    encounters_by_key: dict[tuple[str, str, str], set[tuple[int, int | None, int | None, int | None, str]]] = defaultdict(set)
     for row in read_csv(csv_dir, "encounters.csv"):
         game = version_to_game.get(row.get("version_id", ""))
         if not game:
@@ -187,6 +188,7 @@ def build_encounter_catalog(csv_dir: Path, max_species: int, max_generation: int
             int_or_none(row.get("min_level")),
             int_or_none(row.get("max_level")),
             int_or_none(slot.get("rarity")),
+            slot.get("id", ""),
         ))
 
     by_game: dict[str, list[dict[str, Any]]] = {}
@@ -209,9 +211,28 @@ def build_encounter_catalog(csv_dir: Path, max_species: int, max_generation: int
             )
             for method_id in method_ids:
                 records = encounters_by_key[(game, location_id, method_id)]
+                # A species may occupy multiple encounter slots and/or have several
+                # level rows. Collapse those rows into one entry for this method:
+                # combine the full level range and add unique slot probabilities.
+                species_details: dict[int, dict[str, Any]] = {}
+                for species_id, minimum, maximum, rate, slot_id in records:
+                    detail = species_details.setdefault(species_id, {
+                        "minimum": None,
+                        "maximum": None,
+                        "rates": {},
+                    })
+                    if minimum is not None:
+                        detail["minimum"] = minimum if detail["minimum"] is None else min(detail["minimum"], minimum)
+                    if maximum is not None:
+                        detail["maximum"] = maximum if detail["maximum"] is None else max(detail["maximum"], maximum)
+                    if rate is not None:
+                        slot_key = slot_id or f"slotless-{rate}"
+                        detail["rates"][slot_key] = max(rate, detail["rates"].get(slot_key, rate))
                 compact_entries: set[str] = set()
-                for species_id, minimum, maximum, rate in records:
-                    level = encounter_level(minimum, maximum)
+                for species_id, detail in species_details.items():
+                    level = encounter_level(detail["minimum"], detail["maximum"])
+                    rates = list(detail["rates"].values())
+                    rate = min(100, sum(rates)) if rates else None
                     entry = str(species_id)
                     if level and rate is not None:
                         entry += "," + level + "," + str(rate)
