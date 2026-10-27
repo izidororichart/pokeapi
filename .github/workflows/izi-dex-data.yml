@@ -92,4 +92,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: refresh IZI Dex data bundle"
-          git push
+          # Other documentation or data commits may land after this workflow starts.
+          # Rebase the generated bundle commit onto the current branch tip before pushing.
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
