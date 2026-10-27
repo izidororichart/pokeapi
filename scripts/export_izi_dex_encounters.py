@@ -118,6 +118,7 @@ def build_encounter_catalog(csv_dir: Path, max_species: int, max_generation: int
     pokemon_rows = read_csv(csv_dir, "pokemon.csv")
     species_rows = read_csv(csv_dir, "pokemon_species.csv")
     slots = read_csv(csv_dir, "encounter_slots.csv")
+    area_rates = read_csv(csv_dir, "location_area_encounter_rates.csv")
     methods = read_csv(csv_dir, "encounter_methods.csv")
     method_prose = read_csv(csv_dir, "encounter_method_prose.csv", required=False)
     location_names_rows = read_csv(csv_dir, "location_names.csv", required=False)
@@ -153,6 +154,17 @@ def build_encounter_catalog(csv_dir: Path, max_species: int, max_generation: int
             version_to_game[row.get("id", "")] = game
             version_group_by_game[game] = row.get("version_group_id", "")
 
+    # Include every parent location with a version-specific encounter-rate record,
+    # even if that particular location currently has no individual species rows.
+    # That keeps the route/location list comprehensive instead of deriving it only
+    # from encounters.csv.
+    locations_by_game: dict[str, set[str]] = defaultdict(set)
+    for row in area_rates:
+        game = version_to_game.get(row.get("version_id", ""))
+        location_id = location_area_to_location.get(row.get("location_area_id", ""))
+        if game and location_id:
+            locations_by_game[game].add(location_id)
+
     # (game, location ID, method ID) -> set of compact entries. Merging location
     # areas beneath a location keeps routes together while retaining method details.
     encounters_by_key: dict[tuple[str, str, str], set[tuple[int, int | None, int | None, int | None]]] = defaultdict(set)
@@ -180,6 +192,7 @@ def build_encounter_catalog(csv_dir: Path, max_species: int, max_generation: int
     by_game: dict[str, list[dict[str, Any]]] = {}
     for game in VERSION_TO_GAME.values():
         location_ids = sorted(
+            locations_by_game.get(game, set()) |
             {location_id for candidate_game, location_id, _ in encounters_by_key if candidate_game == game},
             key=lambda value: int_or_none(value) or 0,
         )
@@ -218,8 +231,8 @@ def build_encounter_catalog(csv_dir: Path, max_species: int, max_generation: int
                     )),
                 })
             groups = [group for group in groups if group["pokemon"]]
-            if not groups:
-                continue
+            # Keep known areas with an empty encounter list so all source-backed
+            # route/location entries remain navigable in IZI Dex.
             areas.append({
                 "id": slugify(identifier) or f"location-{location_id}",
                 "name": base_name,
