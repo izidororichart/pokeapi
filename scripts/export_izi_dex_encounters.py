@@ -200,12 +200,12 @@ def build_encounter_catalog(csv_dir: Path, max_species: int, max_generation: int
                 for species_id, minimum, maximum, rate in records:
                     level = encounter_level(minimum, maximum)
                     entry = str(species_id)
-                    if level or rate is not None:
+                    if level and rate is not None:
+                        entry += "," + level + "," + str(rate)
+                    elif level:
                         entry += "," + level
-                    if rate is not None:
-                        if not level:
-                            entry += ","
-                        entry += "," + str(rate)
+                    elif rate is not None:
+                        entry += ",," + str(rate)
                     compact_entries.add(entry)
                 method_label = method_names.get(method_id) or pretty_identifier(method_identifiers.get(method_id, ""))
                 groups.append({
