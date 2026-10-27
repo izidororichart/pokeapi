@@ -4,7 +4,7 @@
   "source": {
     "repository": "izidororichart/pokeapi",
     "branch": "master",
-    "commit": "0ff30b474b6cb89f02f23054555a2dcacc9bec64"
+    "commit": "2df18454d92f045fa447ae57010d161b7990f2a7"
   },
   "scope": {
     "maxSpecies": 809,
