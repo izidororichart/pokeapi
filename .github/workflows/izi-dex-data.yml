@@ -17,6 +17,8 @@ on:
       - "scripts/export_izi_dex_data.py"
       - ".github/workflows/izi-dex-data.yml"
   workflow_dispatch:
+  schedule:
+    - cron: "17 10 * * *"
 
 permissions:
   contents: write
@@ -37,15 +39,33 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Use upstream PokeAPI CSVs for scheduled updates
+        if: github.event_name == 'schedule'
+        run: |
+          git clone --depth 1 https://github.com/PokeAPI/pokeapi.git "$RUNNER_TEMP/pokeapi-upstream"
+          echo "POKEAPI_SOURCE_DIR=$RUNNER_TEMP/pokeapi-upstream/data/v2/csv" >> "$GITHUB_ENV"
+          echo "POKEAPI_SOURCE_COMMIT=$(git -C "$RUNNER_TEMP/pokeapi-upstream" rev-parse HEAD)" >> "$GITHUB_ENV"
+          echo "POKEAPI_SOURCE_BRANCH=master" >> "$GITHUB_ENV"
+          echo "POKEAPI_SOURCE_REPOSITORY=PokeAPI/pokeapi" >> "$GITHUB_ENV"
+
+      - name: Use this fork's CSVs for push and manual updates
+        if: github.event_name != 'schedule'
+        run: |
+          echo "POKEAPI_SOURCE_DIR=data/v2/csv" >> "$GITHUB_ENV"
+          echo "POKEAPI_SOURCE_COMMIT=$GITHUB_SHA" >> "$GITHUB_ENV"
+          echo "POKEAPI_SOURCE_BRANCH=$GITHUB_REF_NAME" >> "$GITHUB_ENV"
+          echo "POKEAPI_SOURCE_REPOSITORY=$GITHUB_REPOSITORY" >> "$GITHUB_ENV"
+
       - name: Generate IZI Dex bundle
         run: |
           python scripts/export_izi_dex_data.py \
-            --pokeapi-dir data/v2/csv \
+            --pokeapi-dir "$POKEAPI_SOURCE_DIR" \
             --max-species 809 \
             --max-generation 7 \
             --output-dir izi-dex/v1 \
-            --source-commit "$GITHUB_SHA" \
-            --source-branch "$GITHUB_REF_NAME"
+            --source-commit "$POKEAPI_SOURCE_COMMIT" \
+            --source-branch "$POKEAPI_SOURCE_BRANCH" \
+            --source-repository "$POKEAPI_SOURCE_REPOSITORY"
 
       - name: Commit bundle when changed
         run: |

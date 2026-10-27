@@ -12,9 +12,9 @@ The versioned directory name (`v1`) represents the JSON contract, not the source
 
 ## Automatic refresh
 
-The workflow at `.github/workflows/izi-dex-data.yml` regenerates the bundle when relevant PokeAPI CSVs change on `master`, or when manually started using **Actions → Refresh IZI Dex data bundle → Run workflow**. It commits only when generated files changed.
+The workflow at `.github/workflows/izi-dex-data.yml` regenerates the bundle immediately when relevant CSVs change on this fork, when manually started using **Actions → Refresh IZI Dex data bundle → Run workflow**, and once daily from the upstream `PokeAPI/pokeapi` repository. It commits only when generated files changed.
 
-This updates the bundle whenever a change reaches this repository. It does **not** automatically sync this fork from upstream `PokeAPI/pokeapi`; after syncing the fork, the workflow runs if one of the source CSVs changed.
+The scheduled run reads upstream CSVs into a temporary directory and publishes the compatible IZI Dex bundle here. It does not merge or overwrite the rest of this fork. A push-triggered run still uses the CSVs in this fork.
 
 The current export intentionally stays limited to National Dex #001–#809 / Generations I–VII so it remains compatible with the current IZI Dex Web app. A future schema or scope change should be published under a new versioned directory and adopted by the app deliberately.
 

@@ -68,6 +68,11 @@ def parse_args() -> argparse.Namespace:
         help="Source branch to record in manifest.json.",
     )
     parser.add_argument(
+        "--source-repository",
+        default=os.environ.get("IZI_DEX_SOURCE_REPOSITORY", os.environ.get("GITHUB_REPOSITORY", "izidororichart/pokeapi")),
+        help="Source repository to record in manifest.json.",
+    )
+    parser.add_argument(
         "--skip-forms",
         action="store_true",
         help="Only write pokemon.json; do not generate pokemon-forms.json.",
@@ -442,7 +447,7 @@ def main() -> int:
             "schemaVersion": 1,
             "dataVersion": hashlib.sha256(data_version_source.encode("utf-8")).hexdigest()[:24],
             "source": {
-                "repository": os.environ.get("GITHUB_REPOSITORY", "izidororichart/pokeapi"),
+                "repository": args.source_repository,
                 "branch": args.source_branch,
                 "commit": args.source_commit,
             },
