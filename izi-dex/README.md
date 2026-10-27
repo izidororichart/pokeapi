@@ -7,7 +7,7 @@ This directory contains a generated, versioned data contract for IZI Dex. The ap
 - `v1/manifest.json`: schema version, data version, source commit, supported scope, and checksums.
 - `v1/pokemon.json`: 809 base species through Generation VII.
 - `v1/pokemon-forms.json`: alternate forms available within the same scope, including form identifiers and sprite keys.
-- `v1/encounters.json`: locations and encounter methods per supported game version, including Pokémon species, level ranges, and encounter-slot rates. Location-area records are grouped under their parent location where applicable.
+- `v1/encounters.json`: source-backed locations and encounter methods per supported game version, including Pokémon species, level ranges, and encounter-slot rates. Location-area records are grouped under their parent location where applicable; locations listed by the version-specific encounter-rate table remain in the export even when no individual wild Pokémon rows are available.
 
 The versioned directory name (`v1`) represents the JSON contract, not the source dataset revision. The `dataVersion` in the manifest is a content hash and changes when any published Pokémon, alternate-form, or encounter JSON changes. The manifest contains a SHA-256 checksum and record count for each data file.
 
