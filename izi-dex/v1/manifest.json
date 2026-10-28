@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "dataVersion": "69544bbefc1c4bdb6f9f00b3",
   "source": {
-    "repository": "izidororichart/pokeapi",
+    "repository": "PokeAPI/pokeapi",
     "branch": "master",
-    "commit": "7d02b81551a66d42651ddd23aee5a2e8f41979ba"
+    "commit": "2bf639e5572812a67d2b94903fdcb9d095f5aeb2"
   },
   "scope": {
     "maxSpecies": 809,
