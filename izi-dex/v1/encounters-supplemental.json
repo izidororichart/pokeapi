@@ -1,0 +1,1297 @@
+{
+  "schemaVersion": 1,
+  "maxSpecies": 1025,
+  "maxGeneration": 9,
+  "games": {
+    "legendsza": [
+      {
+        "id": "za-wild-zone-01",
+        "locationId": 99001,
+        "name": "Wild Zone 1",
+        "region": "Lumiose City",
+        "unlockMission": 3,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 5",
+            "pokemon": [
+              659,
+              661,
+              179,
+              16,
+              664,
+              13,
+              172
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 16,
+                "minLevel": 24,
+                "maxLevel": 26,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-02",
+        "locationId": 99002,
+        "name": "Wild Zone 2",
+        "region": "Lumiose City",
+        "unlockMission": 5,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 6",
+            "pokemon": [
+              406,
+              129,
+              504,
+              688,
+              120,
+              14
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 129,
+                "minLevel": 30,
+                "maxLevel": 32,
+                "rate": 100
+              },
+              {
+                "id": 120,
+                "minLevel": 30,
+                "maxLevel": 32,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-03",
+        "locationId": 99003,
+        "name": "Wild Zone 3",
+        "region": "Lumiose City",
+        "unlockMission": 5,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 8",
+            "pokemon": [
+              25,
+              661,
+              667,
+              669,
+              672,
+              674,
+              677
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 661,
+                "minLevel": 30,
+                "maxLevel": 31,
+                "rate": 100
+              },
+              {
+                "id": 667,
+                "minLevel": 23,
+                "maxLevel": 24,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-04",
+        "locationId": 99004,
+        "name": "Wild Zone 4",
+        "region": "Lumiose City",
+        "unlockMission": 5,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 9",
+            "pokemon": [
+              23,
+              92,
+              167,
+              504,
+              665,
+              679
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 167,
+                "minLevel": 20,
+                "maxLevel": 21,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-05",
+        "locationId": 99005,
+        "name": "Wild Zone 5",
+        "region": "Lumiose City",
+        "unlockMission": 5,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 13",
+            "pokemon": [
+              16,
+              17,
+              63,
+              69,
+              309,
+              504,
+              543,
+              544,
+              659,
+              661,
+              662,
+              688
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 69,
+                "minLevel": 24,
+                "maxLevel": 25,
+                "rate": 100
+              },
+              {
+                "id": 544,
+                "minLevel": 27,
+                "maxLevel": 28,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-06",
+        "locationId": 99006,
+        "name": "Wild Zone 6",
+        "region": "Lumiose City",
+        "unlockMission": 5,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 15",
+            "pokemon": [
+              25,
+              129,
+              180,
+              228,
+              229,
+              307,
+              333,
+              427,
+              688
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 25,
+                "minLevel": 40,
+                "maxLevel": 42,
+                "rate": 100
+              },
+              {
+                "id": 229,
+                "minLevel": 32,
+                "maxLevel": 33,
+                "rate": 100
+              },
+              {
+                "id": 688,
+                "minLevel": 32,
+                "maxLevel": 34,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-07",
+        "locationId": 99007,
+        "name": "Wild Zone 7",
+        "region": "Lumiose City",
+        "unlockMission": 10,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 18",
+            "pokemon": [
+              14,
+              92,
+              315,
+              353,
+              449,
+              531,
+              582,
+              662,
+              670
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 662,
+                "minLevel": 32,
+                "maxLevel": 33,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-08",
+        "locationId": 99008,
+        "name": "Wild Zone 8",
+        "region": "Lumiose City",
+        "unlockMission": 10,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 21",
+            "pokemon": [
+              66,
+              322,
+              323,
+              443,
+              529,
+              551,
+              552
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 323,
+                "minLevel": 39,
+                "maxLevel": 40,
+                "rate": 100
+              },
+              {
+                "id": 552,
+                "minLevel": 37,
+                "maxLevel": 38,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-09",
+        "locationId": 99009,
+        "name": "Wild Zone 9",
+        "region": "Lumiose City",
+        "unlockMission": 10,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 25",
+            "pokemon": [
+              64,
+              302,
+              303,
+              662,
+              677,
+              678,
+              703,
+              310
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 678,
+                "minLevel": 41,
+                "maxLevel": 42,
+                "rate": 100
+              },
+              {
+                "id": 310,
+                "minLevel": 40,
+                "maxLevel": 41,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-10",
+        "locationId": 99010,
+        "name": "Wild Zone 10",
+        "region": "Lumiose City",
+        "unlockMission": 10,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 29",
+            "pokemon": [
+              79,
+              120,
+              318,
+              602,
+              69,
+              319,
+              505,
+              24
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 319,
+                "minLevel": 41,
+                "maxLevel": 43,
+                "rate": 100
+              },
+              {
+                "id": 505,
+                "minLevel": 41,
+                "maxLevel": 43,
+                "rate": 100
+              },
+              {
+                "id": 24,
+                "minLevel": 50,
+                "maxLevel": 52,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-11",
+        "locationId": 99011,
+        "name": "Wild Zone 11",
+        "region": "Lumiose City",
+        "unlockMission": 15,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 32",
+            "pokemon": [
+              79,
+              80,
+              130,
+              618,
+              676,
+              686,
+              692,
+              693
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 80,
+                "minLevel": 42,
+                "maxLevel": 44,
+                "rate": 100
+              },
+              {
+                "id": 693,
+                "minLevel": 42,
+                "maxLevel": 44,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-12",
+        "locationId": 99012,
+        "name": "Wild Zone 12",
+        "region": "Lumiose City",
+        "unlockMission": 15,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 34",
+            "pokemon": [
+              225,
+              361,
+              459,
+              460,
+              582,
+              673,
+              712,
+              713,
+              66,
+              67
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 460,
+                "minLevel": 43,
+                "maxLevel": 45,
+                "rate": 100
+              },
+              {
+                "id": 713,
+                "minLevel": 54,
+                "maxLevel": 56,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-13",
+        "locationId": 99013,
+        "name": "Wild Zone 13",
+        "region": "Lumiose City",
+        "unlockMission": 15,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 36",
+            "pokemon": [
+              123,
+              127,
+              214,
+              708,
+              709,
+              70,
+              666
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 709,
+                "minLevel": 47,
+                "maxLevel": 48,
+                "rate": 100
+              },
+              {
+                "id": 70,
+                "minLevel": 46,
+                "maxLevel": 47,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-14",
+        "locationId": 99014,
+        "name": "Wild Zone 14",
+        "region": "Lumiose City",
+        "unlockMission": 20,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 38",
+            "pokemon": [
+              95,
+              304,
+              305,
+              529,
+              530,
+              587,
+              694
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 530,
+                "minLevel": 48,
+                "maxLevel": 49,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-15",
+        "locationId": 99015,
+        "name": "Wild Zone 15",
+        "region": "Lumiose City",
+        "unlockMission": 20,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 40",
+            "pokemon": [
+              15,
+              246,
+              544,
+              545,
+              93,
+              710,
+              711,
+              353,
+              354,
+              709,
+              714
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 15,
+                "minLevel": 51,
+                "maxLevel": 52,
+                "rate": 100
+              },
+              {
+                "id": 711,
+                "minLevel": 52,
+                "maxLevel": 53,
+                "rate": 100
+              },
+              {
+                "id": 354,
+                "minLevel": 52,
+                "maxLevel": 53,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-16",
+        "locationId": 99016,
+        "name": "Wild Zone 16",
+        "region": "Lumiose City",
+        "unlockMission": 25,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 42",
+            "pokemon": [
+              180,
+              181,
+              308,
+              671,
+              121,
+              689,
+              656,
+              870
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 181,
+                "minLevel": 52,
+                "maxLevel": 53,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-17",
+        "locationId": 99017,
+        "name": "Wild Zone 17",
+        "region": "Lumiose City",
+        "unlockMission": 25,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 44",
+            "pokemon": [
+              650,
+              660,
+              668,
+              303,
+              227,
+              608,
+              707
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 668,
+                "minLevel": 56,
+                "maxLevel": 57,
+                "rate": 100
+              },
+              {
+                "id": 303,
+                "minLevel": 56,
+                "maxLevel": 57,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-18",
+        "locationId": 99018,
+        "name": "Wild Zone 18",
+        "region": "Lumiose City",
+        "unlockMission": 30,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 46",
+            "pokemon": [
+              333,
+              334,
+              371,
+              373,
+              428,
+              653,
+              714,
+              715
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 373,
+                "minLevel": 61,
+                "maxLevel": 62,
+                "rate": 100
+              },
+              {
+                "id": 428,
+                "minLevel": 55,
+                "maxLevel": 56,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-19",
+        "locationId": 99019,
+        "name": "Wild Zone 19",
+        "region": "Lumiose City",
+        "unlockMission": 30,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 48",
+            "pokemon": [
+              35,
+              115,
+              133,
+              173,
+              531,
+              676,
+              780
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 35,
+                "minLevel": 58,
+                "maxLevel": 60,
+                "rate": 100
+              },
+              {
+                "id": 676,
+                "minLevel": 58,
+                "maxLevel": 61,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "za-wild-zone-20",
+        "locationId": 99020,
+        "name": "Wild Zone 20",
+        "region": "Lumiose City",
+        "unlockMission": 39,
+        "encounters": [
+          {
+            "id": "wild-spawns",
+            "method": "Wild Pokémon · zone reference level 55",
+            "pokemon": [
+              306,
+              560,
+              569,
+              1,
+              152,
+              407,
+              282,
+              4,
+              498,
+              450,
+              448,
+              7,
+              158,
+              687,
+              691,
+              26,
+              36,
+              65,
+              68,
+              71,
+              94,
+              115,
+              121,
+              127,
+              130,
+              134,
+              135,
+              136,
+              149,
+              168,
+              214,
+              225,
+              227,
+              248,
+              302,
+              308,
+              334,
+              359,
+              376,
+              445,
+              470,
+              471,
+              475,
+              478,
+              512,
+              514,
+              516,
+              545,
+              553,
+              584,
+              604,
+              609,
+              618,
+              660,
+              663,
+              666,
+              671,
+              673,
+              675,
+              676,
+              681,
+              689,
+              695,
+              700,
+              701,
+              702,
+              703,
+              706,
+              707,
+              711,
+              715,
+              780,
+              870
+            ]
+          },
+          {
+            "id": "guaranteed-alpha",
+            "method": "Guaranteed Alpha Pokémon",
+            "pokemon": [
+              {
+                "id": 26,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 36,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 65,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 68,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 71,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 94,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 115,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 121,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 127,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 130,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 134,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 135,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 136,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 149,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 168,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 214,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 225,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 227,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 248,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 282,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 302,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 306,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 308,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 334,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 359,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 376,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 407,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 445,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 448,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 450,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 470,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 471,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 475,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 478,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 512,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 514,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 516,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 545,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 553,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 560,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 569,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 584,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 604,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 609,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 618,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 660,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 663,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 666,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 671,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 673,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 675,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 676,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 681,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 687,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 689,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 691,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 695,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 700,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 701,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 702,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 703,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 706,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 707,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 711,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 715,
+                "minLevel": 63,
+                "maxLevel": 64,
+                "rate": 100
+              },
+              {
+                "id": 780,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              },
+              {
+                "id": 870,
+                "minLevel": 64,
+                "maxLevel": 65,
+                "rate": 100
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "sources": {
+    "legendsza": [
+      {
+        "name": "Serebii — Wild Zones",
+        "url": "https://www.serebii.net/legendsz-a/wildzones.shtml"
+      },
+      {
+        "name": "Serebii — Guaranteed Alpha Pokémon",
+        "url": "https://www.serebii.net/legendsz-a/alphapokemon.shtml"
+      },
+      {
+        "name": "PowerPyx — Wild Zone locations and level references",
+        "url": "https://www.powerpyx.com/pokemon-legends-z-a-all-wild-zone-locations/"
+      }
+    ]
+  },
+  "coverage": {
+    "legendsza": {
+      "areas": 20,
+      "standardSpawns": "Wild Zone species lists",
+      "guaranteedAlphas": "Guaranteed Alpha list only; random Alpha appearances are not included",
+      "standardLevels": "Zone reference levels are shown in the method label, not assigned per species",
+      "notes": "Zone 20 Alpha level ranges preserve the level bands reported by Serebii."
+    }
+  }
+}
