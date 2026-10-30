@@ -1,24 +1,43 @@
-# IZI Dex data bundle
+# IZI Dex encounter bundle
 
-This directory contains a generated, versioned data contract for IZI Dex. The app reads the small manifest first and then downloads the matching Pokémon catalog. It does not query the PokeAPI at runtime.
+This directory contains the public JSON bundle consumed by IZI Dex.
 
-## Published bundle
+## Encounter sources
 
-- `v1/manifest.json`: schema version, data version, source commit, supported scope, and checksums.
-- `v1/pokemon.json`: 809 base species through Generation VII.
-- `v1/pokemon-forms.json`: alternate forms available within the same scope, including form identifiers and sprite keys.
-- `v1/encounters.json`: source-backed locations and encounter methods per supported game version, including Pokémon species, level ranges, and encounter-slot rates. Location-area records are grouped under their parent location where applicable; locations listed by the version-specific encounter-rate table remain in the export even when no individual wild Pokémon rows are available.
+- The base `encounters.json` catalog is generated from the upstream PokéAPI CSV dataset.
+- `encounters-supplemental.json` contains additional game-specific encounter sources that are not present in the upstream PokéAPI encounter tables. The initial supplemental game is Legends: Z-A.
+- The app merges the base and supplemental catalogs at startup. The checksum in `manifest.json` controls caching and refresh behavior.
 
-The versioned directory name (`v1`) represents the JSON contract, not the source dataset revision. The `dataVersion` in the manifest is a content hash and changes when any published Pokémon, alternate-form, or encounter JSON changes. The manifest contains a SHA-256 checksum and record count for each data file.
+## Refresh the base PokéAPI data
 
-## Automatic refresh
+Run the repository workflow **Refresh IZI Dex data bundle** or execute the exporters with the repository's CSV data. The encounter exporter includes official Let's Go and Sword/Shield version groups and their expansions; the workflow generates data through National Dex #898 / Generation VIII.
 
-The workflow at `.github/workflows/izi-dex-data.yml` regenerates the bundle immediately when relevant CSVs change on this fork, when manually started using **Actions → Refresh IZI Dex data bundle → Run workflow**, and once daily from the upstream `PokeAPI/pokeapi` repository. It commits only when generated files changed.
+## Import PokeDB supplemental data
 
-The scheduled run reads upstream CSVs into a temporary directory and publishes the compatible IZI Dex bundle here. It does not merge or overwrite the rest of this fork. A push-triggered run still uses the CSVs in this fork.
+PokeDB's export tables are not redistributed in this repository. Download the required JSON tables from [PokeDB Data Export](https://pokedb.org/data-export/) into a local folder (default: `data/pokedb/`):
 
-The current export intentionally stays limited to National Dex #001–#809 / Generations I–VII and the game versions supported by the IZI Dex Web app. Encounter data is generated from the encounter, slot, method, location, and version CSVs. IZI Dex checks the manifest once at startup and then loads checksum-addressed files; it does not poll in the background. A future schema or scope change should be published under a new versioned directory and adopted by the app deliberately.
+- `encounters.json`
+- `pokemon_forms.json`
+- `location_areas.json`
+- `locations.json`
+- `encounter_methods.json`
 
-## License and attribution
+The importer also uses this repository's `data/v2/csv/locations.csv` and, when available, `location_names.csv` to map locations to the IDs used by IZI Dex.
 
-This is a derived data export based on the PokeAPI database. See the parent repository's license and attribution guidance.
+Preview the transformation:
+
+```bash
+python scripts/import_izi_dex_pokedb.py --dry-run
+```
+
+Write the merged supplemental catalog and update its checksum in `manifest.json`:
+
+```bash
+python scripts/import_izi_dex_pokedb.py
+```
+
+The importer covers Brilliant Diamond, Shining Pearl, Legends: Arceus, Scarlet and Violet. It preserves existing supplemental game data, including the initial Legends: Z-A catalog. Unmapped locations and incomplete joins are printed in the import report rather than silently assigned invented IDs.
+
+## PokeDB attribution and use
+
+PokeDB asks projects using its export data to link back to PokeDB and identify it as the source. Its published guidance allows educational, research and non-commercial use; commercial applications require contacting PokeDB for a license. See [PokeDB Data Export](https://pokedb.org/data-export/) before redistributing or using the imported data commercially.
