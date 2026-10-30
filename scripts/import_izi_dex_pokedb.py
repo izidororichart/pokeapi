@@ -91,7 +91,15 @@ def rate_value(row: dict[str, Any]) -> float | None:
     value = row.get("probability_overall")
     if value in (None, ""):
         value = row.get("rate_overall")
-    parsed = number(value)
+    if value is None or value == "":
+        return None
+    text = str(value).strip()
+    fraction = re.fullmatch(r"(\\d+(?:\\.\\d+)?)\\s*/\\s*(\\d+(?:\\.\\d+)?)", text)
+    if fraction:
+        numerator, denominator = map(float, fraction.groups())
+        parsed = numerator / denominator * 100 if denominator else None
+    else:
+        parsed = number(text)
     return round(parsed, 2) if parsed is not None and 0 <= parsed <= 100 else None
 
 def labels(row: dict[str, Any]) -> list[str]:
@@ -185,34 +193,35 @@ def main() -> int:
         area_name = area.get("name") or area.get("identifier") or ""
         sub_area = area_name.strip()
         qualifier = " · ".join(part for part in [sub_area, *time_weather_terrain] if part)
-        group_key = (
-            method.get("identifier") or "wild",
-            method.get("name") or "Wild Pokémon",
-            qualifier,
-        )
         minimum, maximum = level_range(row.get("levels"))
         alpha_min, alpha_max = level_range(row.get("alpha_levels"))
         rate = rate_value(row)
         alpha = boolish(row.get("is_alpha")) or row.get("alpha_levels") not in (None, "")
+        method_identifier = method.get("identifier") or "wild"
+        method_name = method.get("name") or "Wild Pokémon"
+        if alpha:
+            method_identifier = "alpha-" + method_identifier
+            method_name = "Alpha Pokémon"
+        group_key = (method_identifier, method_name, qualifier)
         for game in games:
             target = grouped[game][location_slug].setdefault(group_key, {
                 "id": slug("-".join(group_key)) or "encounter",
-                "method": " · ".join(part for part in [group_key[1], qualifier] if part),
+                "method": " · ".join(part for part in [method_name, qualifier] if part),
                 "pokemon": {},
             })
             entry_key = (species_id, bool(alpha))
             entry = target["pokemon"].setdefault(entry_key, {"id": species_id})
             if alpha:
                 if alpha_min is not None:
-                    entry["minLevel"] = alpha_min
-                    entry["maxLevel"] = alpha_max
+                    entry["minLevel"] = min(entry.get("minLevel", alpha_min), alpha_min)
+                    entry["maxLevel"] = max(entry.get("maxLevel", alpha_max), alpha_max)
                 entry["rate"] = 100
             else:
                 if minimum is not None:
-                    entry["minLevel"] = minimum
-                    entry["maxLevel"] = maximum
+                    entry["minLevel"] = min(entry.get("minLevel", minimum), minimum)
+                    entry["maxLevel"] = max(entry.get("maxLevel", maximum), maximum)
                 if rate is not None:
-                    entry["rate"] = rate
+                    entry["rate"] = max(entry.get("rate", rate), rate)
             imported_rows[game] += 1
 
     supplemental_path = output_dir / "encounters-supplemental.json"
