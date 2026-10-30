@@ -12,3 +12,6 @@ Resources/nginx/ssl/*
 !Resources/nginx/ssl/*.sample.*
 .idea*
 data/v2/manifest.json*
+
+# Local PokeDB export files are import inputs, not repository content.
+data/pokedb/
