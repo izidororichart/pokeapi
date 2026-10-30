@@ -63,6 +63,30 @@ def read_csv(folder: Path, filename: str, required: bool = True) -> list[dict[st
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         return list(csv.DictReader(handle))
 
+def read_export_table(folder: Path, stem: str) -> list[dict[str, Any]]:
+    json_path = folder / f"{stem}.json"
+    csv_path = folder / f"{stem}.csv"
+    if json_path.is_file():
+        return read_array(folder, json_path.name)
+    if csv_path.is_file():
+        return read_csv(folder, csv_path.name)
+    raise FileNotFoundError(f"Missing PokeDB export table: {json_path} or {csv_path}")
+
+def array_value(value: Any) -> list[str]:
+    if isinstance(value, list):
+        return [str(item) for item in value if item is not None and str(item).strip()]
+    if value is None or value == "":
+        return []
+    text = str(value).strip()
+    try:
+        parsed = json.loads(text)
+        if isinstance(parsed, list):
+            return [str(item) for item in parsed if item is not None and str(item).strip()]
+    except json.JSONDecodeError:
+        pass
+    text = text.strip("[]")
+    return [item.strip().strip('"').strip("'") for item in re.split(r"[;,]", text) if item.strip()]
+
 def slug(value: str) -> str:
     value = unicodedata.normalize("NFKD", value or "")
     value = "".join(c for c in value if not unicodedata.combining(c))
@@ -126,11 +150,11 @@ def main() -> int:
     csv_dir = options.pokeapi_csv_dir.expanduser().resolve()
     output_dir = options.output_dir.expanduser().resolve()
 
-    encounters = read_array(pokedb_dir, "encounters.json")
-    forms = read_array(pokedb_dir, "pokemon_forms.json")
-    areas = read_array(pokedb_dir, "location_areas.json")
-    locations = read_array(pokedb_dir, "locations.json")
-    methods = read_array(pokedb_dir, "encounter_methods.json")
+    encounters = read_export_table(pokedb_dir, "encounters")
+    forms = read_export_table(pokedb_dir, "pokemon_forms")
+    areas = read_export_table(pokedb_dir, "location_areas")
+    locations = read_export_table(pokedb_dir, "locations")
+    methods = read_export_table(pokedb_dir, "encounter_methods")
 
     pokeapi_locations = read_csv(csv_dir, "locations.csv")
     pokeapi_location_names = read_csv(csv_dir, "location_names.csv", required=False)
@@ -157,7 +181,7 @@ def main() -> int:
     imported_rows = defaultdict(int)
 
     for row in encounters:
-        versions = row.get("version_identifiers") or []
+        versions = array_value(row.get("version_identifiers"))
         games = {VERSION_TO_GAME[v] for v in versions if v in VERSION_TO_GAME}
         if not games:
             continue
@@ -307,7 +331,7 @@ def main() -> int:
     ]
     manifest["encountersSupplemental"] = {
         "file": "encounters-supplemental.json",
-        "count": sum(counts.values()) + len(supplemental_games.get("legendsza", [])),
+        "count": sum(len(game_areas) for game_areas in supplemental_games.values()),
         "gameCount": len(supplemental_games),
         "sha256": checksum,
     }
