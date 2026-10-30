@@ -443,6 +443,21 @@ def main() -> int:
         pokemon_sha256 = hashlib.sha256(pokemon_path.read_bytes()).hexdigest()
         forms_sha256 = hashlib.sha256(forms_path.read_bytes()).hexdigest() if forms_path else None
         data_version_source = pokemon_sha256 + (":" + forms_sha256 if forms_sha256 else "")
+        manifest_path = output_dir / "manifest.json"
+        previous_manifest: dict[str, Any] = {}
+        if manifest_path.is_file():
+            try:
+                previous_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                previous_manifest = {}
+        supplemental = previous_manifest.get("encountersSupplemental")
+        supplemental_file = output_dir / str((supplemental or {}).get("file") or "")
+        if isinstance(supplemental, dict) and supplemental_file.is_file():
+            supplemental_sha256 = hashlib.sha256(supplemental_file.read_bytes()).hexdigest()
+            supplemental["sha256"] = supplemental_sha256
+            data_version_source += ":" + supplemental_sha256
+        else:
+            supplemental = None
         manifest = {
             "schemaVersion": 1,
             "dataVersion": hashlib.sha256(data_version_source.encode("utf-8")).hexdigest()[:24],
@@ -470,6 +485,8 @@ def main() -> int:
                 if forms_path else None
             ),
         }
+        if supplemental:
+            manifest["encountersSupplemental"] = supplemental
         manifest_path = output_dir / "manifest.json"
         manifest_path.write_text(
             json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
