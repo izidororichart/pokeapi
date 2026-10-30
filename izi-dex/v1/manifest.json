@@ -4,7 +4,7 @@
   "source": {
     "repository": "PokeAPI/pokeapi",
     "branch": "master",
-    "commit": "2bf639e5572812a67d2b94903fdcb9d095f5aeb2"
+    "commit": "6b8db7f3cb31cfaa37cb74e5c3edff124bcba5ce"
   },
   "scope": {
     "maxSpecies": 809,
