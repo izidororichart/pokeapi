@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "dataVersion": "4046fb0e8b77fdb308aea550",
+  "dataVersion": "fb4caca6682b14e4ab8268cb",
   "source": {
     "repository": "izidororichart/pokeapi",
     "branch": "master",
@@ -26,5 +26,11 @@
     "count": 2192,
     "gameCount": 32,
     "sha256": "9c6d685fc66f8a0d6f9592c92e050ff36c5f225732cfbd29dec6cbd9b3ddb53a"
+  },
+  "encountersSupplemental": {
+    "file": "encounters-supplemental.json",
+    "count": 20,
+    "gameCount": 1,
+    "sha256": "a689670506d3acd0b876713df82817a8761bd21e2fd3a590dbfce911d20d92df"
   }
 }
