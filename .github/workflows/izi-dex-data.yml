@@ -78,8 +78,8 @@ jobs:
             --source-repository "$POKEAPI_SOURCE_REPOSITORY"
           python scripts/export_izi_dex_encounters.py \
             --pokeapi-dir "$POKEAPI_SOURCE_DIR" \
-            --max-species 809 \
-            --max-generation 7 \
+            --max-species 898 \
+            --max-generation 8 \
             --output-dir izi-dex/v1
 
       - name: Commit bundle when changed
