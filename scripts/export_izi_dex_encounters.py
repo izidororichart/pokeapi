@@ -51,8 +51,8 @@ def parse_args() -> argparse.Namespace:
                         help="PokeAPI clone root, its data/v2/csv directory, or its data directory.")
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR,
                         help=f"Output directory (default: {DEFAULT_OUTPUT_DIR}).")
-    parser.add_argument("--max-species", type=int, default=809, help="Highest National Dex species ID (default: 809).")
-    parser.add_argument("--max-generation", type=int, default=7, help="Highest generation to include (default: 7).")
+    parser.add_argument("--max-species", type=int, default=898, help="Highest National Dex species ID (default: 898).")
+    parser.add_argument("--max-generation", type=int, default=8, help="Highest generation to include (default: 8).")
     return parser.parse_args()
 
 
@@ -320,6 +320,9 @@ def main() -> int:
         if forms_sha:
             checksum_parts.append(forms_sha)
         checksum_parts.append(encounters_sha)
+        supplemental_sha = (manifest.get("encountersSupplemental") or {}).get("sha256")
+        if supplemental_sha:
+            checksum_parts.append(supplemental_sha)
         manifest["dataVersion"] = hashlib.sha256(":".join(checksum_parts).encode("utf-8")).hexdigest()[:24]
         manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(f"Wrote {total_areas} game-specific locations to {encounters_path}")
