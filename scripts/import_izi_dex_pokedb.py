@@ -298,7 +298,8 @@ def main() -> int:
         for location_slug, method_groups in game_locations.items():
             location = location_by_id.get(location_slug, {})
             location_name = location.get("name") or location_slug.replace("-", " ").title()
-            location_id = location_ids.get(location_slug)
+            canonical_location_slug = LOCATION_IDENTIFIER_ALIASES.get(location_slug, location_slug)
+            location_id = location_ids.get(canonical_location_slug)
             if location_id is not None:
                 location_name = english_names.get(str(location_id), location_name)
             out_groups = []
