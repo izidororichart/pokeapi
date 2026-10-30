@@ -33,6 +33,10 @@ VERSION_TO_GAME = {
     "black": "black", "white": "white", "black-2": "black2", "white-2": "white2",
     "x": "x", "y": "y", "omega-ruby": "omegaruby", "alpha-sapphire": "alphasapphire",
     "sun": "sun", "moon": "moon", "ultra-sun": "ultrasun", "ultra-moon": "ultramoon",
+    "lets-go-pikachu": "letsgo-pikachu", "lets-go-eevee": "letsgo-eevee",
+    "sword": "sword", "shield": "shield",
+    "the-isle-of-armor-sword": "sword", "the-isle-of-armor-shield": "shield",
+    "the-crown-tundra-sword": "sword", "the-crown-tundra-shield": "shield",
 }
 REGIONS = {
     "kanto": "Kanto", "johto": "Johto", "hoenn": "Hoenn", "sinnoh": "Sinnoh",
@@ -147,12 +151,12 @@ def build_encounter_catalog(csv_dir: Path, max_species: int, max_generation: int
     }
     slot_by_id = {row.get("id", ""): row for row in slots}
     version_to_game: dict[str, str] = {}
-    version_group_by_game: dict[str, str] = {}
+    version_groups_by_game: dict[str, set[str]] = defaultdict(set)
     for row in versions:
         game = VERSION_TO_GAME.get(row.get("identifier", ""))
         if game:
             version_to_game[row.get("id", "")] = game
-            version_group_by_game[game] = row.get("version_group_id", "")
+            version_groups_by_game[game].add(row.get("version_group_id", ""))
 
     # Include every parent location with a version-specific encounter-rate record,
     # even if that particular location currently has no individual species rows.
@@ -175,7 +179,7 @@ def build_encounter_catalog(csv_dir: Path, max_species: int, max_generation: int
             continue
         location_id = location_area_to_location.get(row.get("location_area_id", ""))
         slot = slot_by_id.get(row.get("encounter_slot_id", ""))
-        if not location_id or not slot or slot.get("version_group_id") != version_group_by_game.get(game):
+        if not location_id or not slot or slot.get("version_group_id") not in version_groups_by_game.get(game, set()):
             continue
         species_id = pokemon_to_species.get(row.get("pokemon_id", ""))
         if species_id is None or str(species_id) not in eligible_species:
@@ -192,7 +196,7 @@ def build_encounter_catalog(csv_dir: Path, max_species: int, max_generation: int
         ))
 
     by_game: dict[str, list[dict[str, Any]]] = {}
-    for game in VERSION_TO_GAME.values():
+    for game in dict.fromkeys(VERSION_TO_GAME.values()):
         location_ids = sorted(
             locations_by_game.get(game, set()) |
             {location_id for candidate_game, location_id, _ in encounters_by_key if candidate_game == game},
