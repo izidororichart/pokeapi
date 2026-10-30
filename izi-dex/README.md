@@ -14,7 +14,7 @@ Run the repository workflow **Refresh IZI Dex data bundle** or execute the expor
 
 ## Import PokeDB supplemental data
 
-PokeDB's export tables are not redistributed in this repository. Download the required JSON tables from [PokeDB Data Export](https://pokedb.org/data-export/) into a local folder (default: `data/pokedb/`):
+PokeDB's export tables are not redistributed in this repository. Download the required tables as JSON or CSV from [PokeDB Data Export](https://pokedb.org/data-export/) into a local folder (default: `data/pokedb/`). The importer prefers a `.json` file when both formats are present:
 
 - `encounters.json`
 - `pokemon_forms.json`
