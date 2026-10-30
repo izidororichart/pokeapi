@@ -25,6 +25,7 @@ on:
       - "data/v2/csv/versions.csv"
       - "scripts/export_izi_dex_data.py"
       - "scripts/export_izi_dex_encounters.py"
+      - "scripts/import_izi_dex_pokedb.py"
       - ".github/workflows/izi-dex-data.yml"
   workflow_dispatch:
   schedule:
@@ -65,6 +66,9 @@ jobs:
           echo "POKEAPI_SOURCE_COMMIT=$GITHUB_SHA" >> "$GITHUB_ENV"
           echo "POKEAPI_SOURCE_BRANCH=$GITHUB_REF_NAME" >> "$GITHUB_ENV"
           echo "POKEAPI_SOURCE_REPOSITORY=$GITHUB_REPOSITORY" >> "$GITHUB_ENV"
+
+      - name: Validate supplemental PokeDB importer
+        run: python -m py_compile scripts/import_izi_dex_pokedb.py
 
       - name: Generate IZI Dex bundle
         run: |
