@@ -25,6 +25,7 @@ on:
       - "data/v2/csv/versions.csv"
       - "scripts/export_izi_dex_data.py"
       - "scripts/export_izi_dex_encounters.py"
+      - "scripts/download_izi_dex_pokedb.py"
       - "scripts/import_izi_dex_pokedb.py"
       - ".github/workflows/izi-dex-data.yml"
   workflow_dispatch:
@@ -67,10 +68,14 @@ jobs:
           echo "POKEAPI_SOURCE_BRANCH=$GITHUB_REF_NAME" >> "$GITHUB_ENV"
           echo "POKEAPI_SOURCE_REPOSITORY=$GITHUB_REPOSITORY" >> "$GITHUB_ENV"
 
-      - name: Validate supplemental PokeDB importer
-        run: python -m py_compile scripts/import_izi_dex_pokedb.py
+      - name: Validate data importers
+        run: |
+          python -m py_compile scripts/export_izi_dex_data.py
+          python -m py_compile scripts/export_izi_dex_encounters.py
+          python -m py_compile scripts/download_izi_dex_pokedb.py
+          python -m py_compile scripts/import_izi_dex_pokedb.py
 
-      - name: Generate IZI Dex bundle
+      - name: Generate base PokeAPI bundle
         run: |
           python scripts/export_izi_dex_data.py \
             --pokeapi-dir "$POKEAPI_SOURCE_DIR" \
@@ -84,6 +89,18 @@ jobs:
             --pokeapi-dir "$POKEAPI_SOURCE_DIR" \
             --max-species 898 \
             --max-generation 8 \
+            --output-dir izi-dex/v1
+
+      - name: Download PokeDB encounter exports
+        run: |
+          python scripts/download_izi_dex_pokedb.py \
+            --output-dir "$RUNNER_TEMP/pokedb"
+
+      - name: Merge PokeDB encounters into supplemental catalog
+        run: |
+          python scripts/import_izi_dex_pokedb.py \
+            --pokedb-dir "$RUNNER_TEMP/pokedb" \
+            --pokeapi-csv-dir "$POKEAPI_SOURCE_DIR" \
             --output-dir izi-dex/v1
 
       - name: Commit bundle when changed
