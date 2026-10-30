@@ -35,6 +35,40 @@ VERSION_TO_GAME = {
     "violet": "violet",
 }
 
+# PokeDB sometimes uses display-oriented slugs that differ from the canonical
+# PokeAPI location identifiers. These aliases point only to known matching
+# places; locations without a reliable equivalent stay source-slugged.
+LOCATION_IDENTIFIER_ALIASES = {
+    **{
+        f"route-{number}-sinnoh": f"sinnoh-route-{number}"
+        for number in (201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 221, 222, 224, 225, 227, 228, 229)
+    },
+    "route-220-sinnoh": "sinnoh-sea-route-220",
+    "route-223-sinnoh": "sinnoh-sea-route-223",
+    "route-226-sinnoh": "sinnoh-sea-route-226",
+    "route-230-sinnoh": "sinnoh-sea-route-230",
+    **{
+        f"{province}-province-area-{number}": f"paldea-{province}-province-area-{number}"
+        for province in ("south", "east", "west", "north")
+        for number in ("one", "two", "three", "four", "five", "six")
+    },
+    "avaluggs-lagacy": "avaluggs-legacy",
+    "lake-acuity-sinnoh": "lake-acuity",
+    "lake-valor-sinnoh": "lake-valor",
+    "lake-verity-sinnoh": "lake-verity",
+    "lake-acuity-hisui": "hisui-lake-acuity",
+    "lake-valor-hisui": "hisui-lake-valor",
+    "lake-verity-hisui": "hisui-lake-verity",
+    "mount-coronet": "mt-coronet",
+    "pokemon-league-paldea": "pokemon-league",
+    "pokemon-league-sinnoh": "sinnoh-pokemon-league",
+    "ramanas-park": "ramanas-island",
+    "solaceon-ruins-hisui": "hisui-solaceon-ruins",
+    "solaceon-ruins-sinnoh": "solaceon-ruins",
+    "spring-path-hisui": "hisui-spring-path",
+    "victory-road-sinnoh": "sinnoh-victory-road",
+}
+
 def args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build IZI Dex encounter supplement from PokeDB JSON exports.")
     parser.add_argument("--pokedb-dir", type=Path, default=DEFAULT_POKEDB_DIR)
@@ -178,6 +212,7 @@ def main() -> int:
     grouped: dict[str, dict[str, dict[tuple[str, ...], dict[str, Any]]]] = defaultdict(lambda: defaultdict(dict))
     missing = defaultdict(int)
     unmapped_locations: set[str] = set()
+    unmapped_locations_by_game: dict[str, set[str]] = defaultdict(set)
     imported_rows = defaultdict(int)
 
     for row in encounters:
@@ -206,9 +241,12 @@ def main() -> int:
             missing["species"] += 1
             continue
         location_slug = location.get("identifier") or slug(location.get("name") or "unknown")
-        location_id = location_ids.get(location_slug)
+        canonical_location_slug = LOCATION_IDENTIFIER_ALIASES.get(location_slug, location_slug)
+        location_id = location_ids.get(canonical_location_slug)
         if location_id is None:
             unmapped_locations.add(location_slug)
+            for game in games:
+                unmapped_locations_by_game[game].add(location_slug)
         location_name = location.get("name") or location_slug.replace("-", " ").title()
         if location_id is not None:
             location_name = english_names.get(str(location_id), location_name)
@@ -302,6 +340,10 @@ def main() -> int:
             "areasByGame": counts,
             "rowsByGame": dict(imported_rows),
             "unmappedLocationIdentifiers": sorted(unmapped_locations),
+            "unmappedLocationsByGame": {
+                game: sorted(values) for game, values in sorted(unmapped_locations_by_game.items())
+            },
+            "locationAliasesApplied": len(LOCATION_IDENTIFIER_ALIASES),
             "missingJoins": dict(missing),
         }},
     }
