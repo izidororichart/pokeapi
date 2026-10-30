@@ -128,15 +128,15 @@ def rate_value(row: dict[str, Any]) -> float | None:
 
 def labels(row: dict[str, Any]) -> list[str]:
     result: list[str] = []
-    if not row.get("during_any_time"):
-        times = [name for name in ("morning", "day", "evening", "night") if row.get("during_" + name)]
+    if not boolish(row.get("during_any_time")):
+        times = [name for name in ("morning", "day", "evening", "night") if boolish(row.get("during_" + name))]
         if times:
             result.append("Time: " + ", ".join(times))
-    if not row.get("while_weather_overall"):
-        weather = [name for name in ("clear", "harsh_sunlight", "cloudy", "blizzard") if row.get("while_" + name)]
+    if not boolish(row.get("while_weather_overall")):
+        weather = [name for name in ("clear", "harsh_sunlight", "cloudy", "blizzard") if boolish(row.get("while_" + name))]
         if weather:
             result.append("Weather: " + ", ".join(weather).replace("_", " "))
-    terrain = [name for name in ("land", "watersurface", "underwater", "overland", "sky") if row.get("on_terrain_" + name)]
+    terrain = [name for name in ("land", "watersurface", "underwater", "overland", "sky") if boolish(row.get("on_terrain_" + name))]
     if terrain:
         result.append("Terrain: " + ", ".join(terrain).replace("watersurface", "water surface"))
     return result
