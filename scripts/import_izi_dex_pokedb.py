@@ -94,7 +94,7 @@ def rate_value(row: dict[str, Any]) -> float | None:
     if value is None or value == "":
         return None
     text = str(value).strip()
-    fraction = re.fullmatch(r"(\\d+(?:\\.\\d+)?)\\s*/\\s*(\\d+(?:\\.\\d+)?)", text)
+    fraction = re.fullmatch(r"(\d+(?:\.\d+)?)\s*/\s*(\d+(?:\.\d+)?)", text)
     if fraction:
         numerator, denominator = map(float, fraction.groups())
         parsed = numerator / denominator * 100 if denominator else None
