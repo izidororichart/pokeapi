@@ -492,6 +492,8 @@ def main() -> int:
             json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
         )
+        if supplemental:
+            print(f"Preserved supplemental encounter catalog: {supplemental['file']} ({supplemental['sha256']})")
         print(f"Wrote data manifest {manifest_path} (version {manifest['dataVersion']})")
         print(f"Source CSV directory: {csv_dir}")
         return 0
