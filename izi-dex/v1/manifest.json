@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "dataVersion": "695739c3d5f07e6c728a02f4",
+  "dataVersion": "2847fe90c3706ca91d8b9d5a",
   "source": {
-    "repository": "izidororichart/pokeapi",
+    "repository": "PokeAPI/pokeapi",
     "branch": "master",
-    "commit": "768da724a4c2ec28581451ab4e3240209cdbb6be"
+    "commit": "6b8db7f3cb31cfaa37cb74e5c3edff124bcba5ce"
   },
   "scope": {
     "maxSpecies": 809,
@@ -25,7 +25,7 @@
     "file": "encounters-supplemental.json",
     "count": 430,
     "gameCount": 6,
-    "sha256": "eda53ba753ed2112bd015a456aed2a709c7561f2462feb21fa20c1e0085cdd6c"
+    "sha256": "70493bfde3ea137f0417730c300af827f67b47fc21531840dc486ba8199c80db"
   },
   "encounters": {
     "file": "encounters.json",
