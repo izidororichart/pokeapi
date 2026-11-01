@@ -95678,17 +95678,17 @@
     "pokedb": {
       "areasByGame": {
         "legendsarceus": 88,
-        "shiningpearl": 92,
         "brilliantdiamond": 92,
-        "violet": 69,
-        "scarlet": 69
+        "shiningpearl": 92,
+        "scarlet": 69,
+        "violet": 69
       },
       "rowsByGame": {
         "legendsarceus": 1756,
-        "shiningpearl": 2021,
         "brilliantdiamond": 2013,
-        "violet": 4135,
-        "scarlet": 4101
+        "shiningpearl": 2021,
+        "scarlet": 4101,
+        "violet": 4135
       },
       "unmappedLocationIdentifiers": [
         "area-zero-underdepths",
