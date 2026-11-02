@@ -97,8 +97,8 @@ jobs:
 
       - name: Generate HM compatibility bundle
         run: |
-          python scripts/export_izi_dex_hm_compatibility.py \\
-            --pokeapi-dir "$POKEAPI_SOURCE_DIR" \\
+          python scripts/export_izi_dex_hm_compatibility.py \
+            --pokeapi-dir "$POKEAPI_SOURCE_DIR" \
             --source-commit "$POKEAPI_SOURCE_COMMIT"
 
       - name: Download PokeDB encounter exports
