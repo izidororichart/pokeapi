@@ -2,7 +2,7 @@ name: Refresh IZI Dex data bundle
 
 on:
   push:
-    branches: ["master"]
+    branches: ["master", "dev-testing"]
     paths:
       - "data/v2/csv/pokemon.csv"
       - "data/v2/csv/pokemon_species.csv"
@@ -13,7 +13,7 @@ on:
       - "data/v2/csv/pokemon_form_names.csv"
       - "data/v2/csv/types.csv"
       - "data/v2/csv/stats.csv"
-      - "data/v2/csv/version_groups.csv"
+      - "data/v2/csv/version_groups.csv"\n      - "data/v2/csv/moves.csv"\n      - "data/v2/csv/pokemon_moves.csv"\n      - "scripts/export_izi_dex_hm_compatibility.py"
       - "data/v2/csv/encounters.csv"
       - "data/v2/csv/encounter_slots.csv"
       - "data/v2/csv/encounter_methods.csv"
@@ -70,7 +70,7 @@ jobs:
 
       - name: Validate data importers
         run: |
-          python -m py_compile scripts/export_izi_dex_data.py
+          python -m py_compile scripts/export_izi_dex_hm_compatibility.py\n          python -m py_compile scripts/export_izi_dex_data.py
           python -m py_compile scripts/export_izi_dex_encounters.py
           python -m py_compile scripts/download_izi_dex_pokedb.py
           python -m py_compile scripts/import_izi_dex_pokedb.py
@@ -91,7 +91,7 @@ jobs:
             --max-generation 8 \
             --output-dir izi-dex/v1
 
-      - name: Download PokeDB encounter exports
+      - name: Generate HM compatibility bundle\n        run: |\n          python scripts/export_izi_dex_hm_compatibility.py \\\n            --pokeapi-dir "$POKEAPI_SOURCE_DIR" \\\n            --source-commit "$POKEAPI_SOURCE_COMMIT"\n\n      - name: Download PokeDB encounter exports
         run: |
           python scripts/download_izi_dex_pokedb.py \
             --output-dir "$RUNNER_TEMP/pokedb"
