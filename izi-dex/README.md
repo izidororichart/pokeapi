@@ -1,8 +1,8 @@
 # IZI Dex encounter bundle
 
-This directory contains the public JSON bundle consumed by IZI Dex.
+This directory contains the public JSON bundle consumed by IZI Dex, including Pokémon, encounters, and game-specific HM compatibility.
 
-## Encounter sources
+## HM compatibility\n\n- `hm-compatibility.json` is generated from `moves.csv`, `version_groups.csv`, and `pokemon_moves.csv`.\n- It records each Pokémon’s HM moves by PokéAPI version group, allowing IZI Dex to load compatibility in one bundled request rather than querying each Pokémon while scrolling.\n- The list is derived from the same version-group learnset data used by PokéAPI; it does not assume that compatibility is identical across games.\n\n## Encounter sources
 
 - The base `encounters.json` catalog is generated from the upstream PokéAPI CSV dataset.
 - `encounters-supplemental.json` merges additional encounter sources that are not available in PokéAPI's base encounter tables:
