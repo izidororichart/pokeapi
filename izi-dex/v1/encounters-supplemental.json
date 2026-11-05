@@ -95680,15 +95680,15 @@
         "legendsarceus": 88,
         "brilliantdiamond": 92,
         "shiningpearl": 92,
-        "violet": 69,
-        "scarlet": 69
+        "scarlet": 69,
+        "violet": 69
       },
       "rowsByGame": {
         "legendsarceus": 1756,
         "brilliantdiamond": 2013,
         "shiningpearl": 2021,
-        "violet": 4135,
-        "scarlet": 4101
+        "scarlet": 4101,
+        "violet": 4135
       },
       "unmappedLocationIdentifiers": [
         "area-zero-underdepths",
