@@ -95678,15 +95678,15 @@
     "pokedb": {
       "areasByGame": {
         "legendsarceus": 88,
-        "brilliantdiamond": 92,
         "shiningpearl": 92,
+        "brilliantdiamond": 92,
         "violet": 69,
         "scarlet": 69
       },
       "rowsByGame": {
         "legendsarceus": 1756,
-        "brilliantdiamond": 2013,
         "shiningpearl": 2021,
+        "brilliantdiamond": 2013,
         "violet": 4135,
         "scarlet": 4101
       },
