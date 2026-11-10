@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "dataVersion": "2847fe90c3706ca91d8b9d5a",
+  "dataVersion": "2c44c46fb0c91594e07d0b1b",
   "source": {
     "repository": "PokeAPI/pokeapi",
     "branch": "master",
@@ -25,7 +25,7 @@
     "file": "encounters-supplemental.json",
     "count": 430,
     "gameCount": 6,
-    "sha256": "70493bfde3ea137f0417730c300af827f67b47fc21531840dc486ba8199c80db"
+    "sha256": "52032dd1f69521e50f24c2b75640a71e8756c3af23533810e4fd688328ff8583"
   },
   "encounters": {
     "file": "encounters.json",
